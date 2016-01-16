@@ -11,7 +11,7 @@ export default Ember.Component.extend(ClickOutside, {
     value: null,
     required: false,
     placeHolder: null,
-    optionLabelPath: 'name',
+    optionLabelPath: 'value',
     optionValuePath: null,
     disabled: false,
 
@@ -50,13 +50,13 @@ export default Ember.Component.extend(ClickOutside, {
             return obj[optionLabelPath].match(re);
         });
 
-        var value = this.get('value');
+        var value = this.get('_valueObj');
 
         content = content.map(function(obj) {
             return Ember.Object.create({
                 value: obj[optionLabelPath],
                 isHighlighted: false,
-                isSelected: (value && value.id === obj.id),
+                //isSelected: (value && value === obj.id),
                 obj: obj
             });
         });
@@ -65,7 +65,7 @@ export default Ember.Component.extend(ClickOutside, {
             content.unshiftObject(Ember.Object.create({
                 value: this.get('placeHolder'),
                 isHighlighted: false,
-                isSelected: false,
+                //isSelected: false,
                 obj: null
             }));
         }
