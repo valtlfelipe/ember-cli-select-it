@@ -1,6 +1,6 @@
-# Ember-select
+# Ember-cli-select-it
 
-This README outlines the details of collaborating on this Ember addon.
+Simple Ember dropdown select component.
 
 ## Installation
 
