@@ -68,6 +68,7 @@ export default Ember.Component.extend(ClickOutside, {
     onKeydown: function(e) {
         var _searchResults = this.get('_searchResults');
         var next, current;
+        
         // arrow down
         if(e.which === 40) {
             if(!this.get('_isOpen')) {
@@ -135,17 +136,20 @@ export default Ember.Component.extend(ClickOutside, {
     closeDropDown() {
         this.set('_isOpen', false);
         this.set('_searchResults', null);
+        var self = this;
         Ember.run.next(function() {
-            this.$('.select-it-display').focus();
+            self.$('.select-it-display').focus();
         });
+
     },
 
     openDropDown() {
         this.set('_isOpen', true);
         this.set('searchValue', this.get('displayValue'));
         this.searchAction();
+        var self = this;
         Ember.run.next(function() {
-            this.$('input.select-it-search').focus().select();
+            self.$('input.select-it-search').focus().select();
         });
     },
 
@@ -155,7 +159,9 @@ export default Ember.Component.extend(ClickOutside, {
             return;
         }
 
-        this.closeDropDown();
+        if(this.get('_isOpen')) {
+            this.closeDropDown();
+        }
     },
 
     _attachClickOutsideHandler: on('didInsertElement', function() {
