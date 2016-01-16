@@ -1,0 +1,32 @@
+{{#if _isOpen}}
+    {{input type="type" value=searchValue class="form-control select-it-input select-it-search"}}
+    <span class="select-it-arrow" {{action 'closeSearch'}}><span class="glyphicon glyphicon-chevron-up"></span></span>
+    <div class="select-it-drop-list">
+        {{#if _searchResults}}
+            <ul class="select-it-results list-unstyled">
+                {{#each _searchResults as |result|}}
+                    <li class="{{if result.isHighlighted 'highlighted' ''}}"
+                        {{action 'itemHighlighted' result on="mouseEnter"}}
+                        {{action 'itemHighlighted' result on="mouseLeave"}}
+                        {{action 'itemSelected' result on="click"}}
+                    >
+                        <div class="select-it-result-label">
+                            {{result.value}}
+                        </div>
+                    </li>
+                {{/each}}
+            </ul>
+        {{else}}
+            <div class="select-it-no-results">Nenhum resultado</div>
+        {{/if}}
+    </div>
+{{else}}
+    <div class="form-control select-it-display select-it-ignore" tabindex="0" {{action 'openSearch'}}>
+        {{#if showPlaceHolder}}
+            <span class="select-it-placeholder select-it-ignore">{{placeHolder}}</span>
+        {{/if}}
+        {{displayValue}}
+        <span class="select-it-arrow"><span class="glyphicon glyphicon-chevron-down"></span></span>
+    </div>
+    {{input type="text" value=value class="form-control select-it-hidden-input" tabindex="-1" required=required }}
+{{/if}}
