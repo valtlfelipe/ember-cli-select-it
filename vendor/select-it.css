@@ -15,6 +15,12 @@
     color: #999;
 }
 
+.ember-select-it .select-it-disabled {
+    background-color: #eee;
+    opacity: 1;
+    cursor: not-allowed;
+}
+
 .ember-select-it .select-it-hidden-input {
     width: 100%;
     position: absolute;

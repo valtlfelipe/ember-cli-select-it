@@ -21,12 +21,12 @@
         {{/if}}
     </div>
 {{else}}
-    <div class="form-control select-it-display select-it-ignore" tabindex="0" {{action 'openSearch'}}>
+    <div class="form-control select-it-display select-it-ignore {{if disabled 'select-it-disabled' ''}}" tabindex="0" {{action 'openSearch'}}>
         {{#if showPlaceHolder}}
             <span class="select-it-placeholder select-it-ignore">{{placeHolder}}</span>
         {{/if}}
         {{displayValue}}
         <span class="select-it-arrow"><span class="glyphicon glyphicon-chevron-down"></span></span>
     </div>
-    {{input type="text" value=value class="form-control select-it-hidden-input" tabindex="-1" required=required }}
+    {{input type="text" value=value class="form-control select-it-hidden-input" disabled=disabled tabindex="-1" required=required }}
 {{/if}}

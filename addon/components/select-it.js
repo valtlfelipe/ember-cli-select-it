@@ -11,12 +11,23 @@ export default Ember.Component.extend(ClickOutside, {
     value: null,
     required: false,
     placeHolder: null,
+    optionLabelPath: 'name',
+    optionIdPath: null,
+    disabled: false,
 
     _isOpen: false,
     _searchResults: null,
 
+    _valueObj: Ember.computed('value', 'optionIdPath', 'content', function() {
+        if(this.get('optionIdPath')) {
+            return this.get('content').findBy(this.get('optionIdPath'), this.get('value'));
+        }
+
+        return this.get('value');
+    }),
+
     displayValue: Ember.computed('value', function() {
-        return this.get('value') ? this.get('value').name : "";
+        return this.get('_valueObj') ? this.get('_valueObj')[this.get('optionLabelPath')] : "";
     }),
 
     searchValueChanged: Ember.observer('searchValue', function() {
@@ -33,16 +44,17 @@ export default Ember.Component.extend(ClickOutside, {
 
     searchAction() {
         var searchValue = this.get('searchValue');
+        var optionLabelPath = this.get('optionLabelPath');
         var content = this.get('content').filter(function(obj) {
             var re = new RegExp(searchValue, 'gi');
-            return obj.name.match(re);
+            return obj[optionLabelPath].match(re);
         });
 
         var value = this.get('value');
 
         content = content.map(function(obj) {
             return Ember.Object.create({
-                value: obj.name,
+                value: obj[optionLabelPath],
                 isHighlighted: false,
                 isSelected: (value && value.id === obj.id),
                 obj: obj
@@ -68,7 +80,7 @@ export default Ember.Component.extend(ClickOutside, {
     onKeydown: function(e) {
         var _searchResults = this.get('_searchResults');
         var next, current;
-        
+
         // arrow down
         if(e.which === 40) {
             if(!this.get('_isOpen')) {
@@ -144,6 +156,10 @@ export default Ember.Component.extend(ClickOutside, {
     },
 
     openDropDown() {
+        if(this.get('disabled')) {
+            return;
+        }
+
         this.set('_isOpen', true);
         this.set('searchValue', this.get('displayValue'));
         this.searchAction();
@@ -186,7 +202,11 @@ export default Ember.Component.extend(ClickOutside, {
             result.toggleProperty('isHighlighted');
         },
         itemSelected(result) {
-            this.set('value', result.obj);
+            if(this.get('optionIdPath') && result.obj) {
+                this.set('value', result.obj[this.get('optionIdPath')]);
+            } else {
+                this.set('value', result.obj);
+            }
             this.closeDropDown();
         }
     }
