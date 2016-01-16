@@ -2,7 +2,7 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-select-it',
+  name: 'ember-cli-select-it',
   included: function(app) {
       app.import('vendor/select-it.css');
   },

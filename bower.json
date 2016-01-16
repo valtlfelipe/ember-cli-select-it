@@ -1,5 +1,5 @@
 {
-  "name": "ember-select-it",
+  "name": "ember-cli-select-it",
   "dependencies": {
     "ember": "^2.0.0",
     "ember-cli-shims": "0.0.6",

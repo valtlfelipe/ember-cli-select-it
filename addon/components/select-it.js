@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import ClickOutside from '../mixins/click-outside';
-const { Component, on } = Ember;
+const { on } = Ember;
 const { next } = Ember.run;
 
 export default Ember.Component.extend(ClickOutside, {
@@ -67,6 +67,7 @@ export default Ember.Component.extend(ClickOutside, {
 
     onKeydown: function(e) {
         var _searchResults = this.get('_searchResults');
+        var next, current;
         // arrow down
         if(e.which === 40) {
             if(!this.get('_isOpen')) {
@@ -76,13 +77,12 @@ export default Ember.Component.extend(ClickOutside, {
                 return;
             }
 
-            var current = _searchResults.findBy('isHighlighted', true);
-            var next = null;
+            current = _searchResults.findBy('isHighlighted', true);
+            next = null;
 
             if(current) {
                 current.set('isHighlighted', false);
-                var index = _searchResults.indexOf(current);
-                next = _searchResults.objectAt(index + 1);
+                next = _searchResults.objectAt(_searchResults.indexOf(current) + 1);
                 if(!next) {
                     next = _searchResults.objectAt(0);
                 }
@@ -101,13 +101,12 @@ export default Ember.Component.extend(ClickOutside, {
                 return;
             }
 
-            var current = _searchResults.findBy('isHighlighted', true);
-            var next = null;
+            current = _searchResults.findBy('isHighlighted', true);
+            next = null;
 
             if(current) {
                 current.set('isHighlighted', false);
-                var index = _searchResults.indexOf(current);
-                next = _searchResults.objectAt(index - 1);
+                next = _searchResults.objectAt(_searchResults.indexOf(current) - 1);
                 if(!next) {
                     next = _searchResults.objectAt(_searchResults.length - 1);
                 }
@@ -120,7 +119,7 @@ export default Ember.Component.extend(ClickOutside, {
         // enter
         } else if(e.which === 13) {
             if(this.get('_isOpen')) {
-                var current = _searchResults.findBy('isHighlighted', true);
+                current = _searchResults.findBy('isHighlighted', true);
                 this.send('itemSelected', current);
             } else {
                 this.openDropDown();
@@ -137,7 +136,7 @@ export default Ember.Component.extend(ClickOutside, {
         this.set('_isOpen', false);
         this.set('_searchResults', null);
         Ember.run.next(function() {
-            self.$('.select-it-display').focus();
+            this.$('.select-it-display').focus();
         });
     },
 
@@ -146,13 +145,13 @@ export default Ember.Component.extend(ClickOutside, {
         this.set('searchValue', this.get('displayValue'));
         this.searchAction();
         Ember.run.next(function() {
-            self.$('input.select-it-search').focus().select();
+            this.$('input.select-it-search').focus().select();
         });
     },
 
     clickOutside(e) {
         const exceptSelector = '.select-it-ignore';
-        if (exceptSelector && $(e.target).closest(exceptSelector).length > 0) {
+        if (exceptSelector && Ember.$(e.target).closest(exceptSelector).length > 0) {
             return;
         }
 
@@ -178,7 +177,7 @@ export default Ember.Component.extend(ClickOutside, {
             var current = this.get('_searchResults').findBy('isHighlighted', true);
             current.set('isHighlighted', false);
 
-            result.toggleProperty('isHighlighted')
+            result.toggleProperty('isHighlighted');
         },
         itemSelected(result) {
             this.set('value', result.obj);
