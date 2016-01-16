@@ -1,3 +1,3 @@
-import SelectItComponent from 'ember-select/components/select-it';
+import SelectItComponent from 'ember-cli-select-it/components/select-it';
 
 export default SelectItComponent;
