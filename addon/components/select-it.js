@@ -12,15 +12,15 @@ export default Ember.Component.extend(ClickOutside, {
     required: false,
     placeHolder: null,
     optionLabelPath: 'name',
-    optionIdPath: null,
+    optionValuePath: null,
     disabled: false,
 
     _isOpen: false,
     _searchResults: null,
 
-    _valueObj: Ember.computed('value', 'optionIdPath', 'content', function() {
-        if(this.get('optionIdPath')) {
-            return this.get('content').findBy(this.get('optionIdPath'), this.get('value'));
+    _valueObj: Ember.computed('value', 'optionValuePath', 'content', function() {
+        if(this.get('optionValuePath')) {
+            return this.get('content').findBy(this.get('optionValuePath'), this.get('value'));
         }
 
         return this.get('value');
@@ -202,8 +202,8 @@ export default Ember.Component.extend(ClickOutside, {
             result.toggleProperty('isHighlighted');
         },
         itemSelected(result) {
-            if(this.get('optionIdPath') && result.obj) {
-                this.set('value', result.obj[this.get('optionIdPath')]);
+            if(this.get('optionValuePath') && result.obj) {
+                this.set('value', result.obj[this.get('optionValuePath')]);
             } else {
                 this.set('value', result.obj);
             }
