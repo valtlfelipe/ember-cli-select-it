@@ -1,4 +1,4 @@
-# ember-cli-select-it
+# ember-cli-select-it [![Build Status](https://travis-ci.org/valtlfelipe/ember-cli-select-it.svg?branch=master)](https://travis-ci.org/valtlfelipe/ember-cli-select-it)
 
 Simple Ember dropdown select component.
 
