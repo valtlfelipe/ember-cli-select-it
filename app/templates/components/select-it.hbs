@@ -1,5 +1,5 @@
 {{#if _isOpen}}
-    {{input type="type" value=searchValue class="form-control select-it-input select-it-search"}}
+    {{input type="text" value=searchValue class="form-control select-it-input select-it-search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="off"}}
     <span class="select-it-arrow" {{action 'closeSearch'}}><span class="glyphicon glyphicon-chevron-up"></span></span>
     <div class="select-it-drop-list">
         {{#if _searchResults}}
@@ -25,8 +25,14 @@
         {{#if showPlaceHolder}}
             <span class="select-it-placeholder select-it-ignore">{{placeHolder}}</span>
         {{/if}}
-        {{displayValue}}
+        {{#if multiple}}
+            {{#each value as |val|}}
+                <a href {{action 'removeValue' value}} class="btn btn-sm btn-primary">{{val}}, </a>
+            {{/each}}
+        {{else}}
+            {{displayValue}}
+        {{/if}}
         <span class="select-it-arrow"><span class="glyphicon glyphicon-chevron-down"></span></span>
     </div>
-    {{input type="text" value=value class="form-control select-it-hidden-input" disabled=disabled tabindex="-1" required=required }}
+    {{input type="text" value=value class="form-control select-it-hidden-input" disabled=disabled tabindex="-1" required=required}}
 {{/if}}

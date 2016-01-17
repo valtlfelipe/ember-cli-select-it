@@ -1,7 +1,5 @@
 import Ember from 'ember';
 import ClickOutside from '../mixins/click-outside';
-const { on } = Ember;
-const { next } = Ember.run;
 
 export default Ember.Component.extend(ClickOutside, {
     tagName: 'div',
@@ -14,6 +12,7 @@ export default Ember.Component.extend(ClickOutside, {
     optionLabelPath: 'value',
     optionValuePath: null,
     disabled: false,
+    multiple: false,
 
     _isOpen: false,
     _searchResults: null,
@@ -45,23 +44,34 @@ export default Ember.Component.extend(ClickOutside, {
     searchAction() {
         var searchValue = this.get('searchValue');
         var optionLabelPath = this.get('optionLabelPath');
+        var optionValuePath = this.get('optionValuePath');
+        var value = this.get('value');
+        var isMultiple = this.get('multiple');
+
         var content = this.get('content').filter(function(obj) {
+            if(isMultiple) {
+                if((optionLabelPath && value.indexOf(obj[optionValuePath]) >= 0) || value.indexOf(obj) >= 0) {
+                    return false;
+                }
+            }
             var re = new RegExp(searchValue, 'gi');
-            return obj[optionLabelPath].match(re);
+            return obj[optionLabelPath] && obj[optionLabelPath].match(re);
         });
 
-        var value = this.get('_valueObj');
+        //var valueObj = this.get('_valueObj');
 
         content = content.map(function(obj) {
             return Ember.Object.create({
                 value: obj[optionLabelPath],
                 isHighlighted: false,
-                //isSelected: (value && value === obj.id),
+                //isSelected: (valueObj && valueObj === obj.id),
                 obj: obj
             });
         });
 
-        if(!this.get('required') && !searchValue) {
+        content = Ember.A(content);
+
+        if(!this.get('required') && !searchValue && !isMultiple) {
             content.unshiftObject(Ember.Object.create({
                 value: this.get('placeHolder'),
                 isHighlighted: false,
@@ -77,7 +87,7 @@ export default Ember.Component.extend(ClickOutside, {
         this.set('_searchResults', content);
     },
 
-    onKeydown: function(e) {
+    keyDown: function(e) {
         var _searchResults = this.get('_searchResults');
         var next, current;
 
@@ -143,7 +153,7 @@ export default Ember.Component.extend(ClickOutside, {
                 this.closeDropDown();
             }
         }
-    }.on('keyDown'),
+    },
 
     closeDropDown() {
         this.set('_isOpen', false);
@@ -160,8 +170,14 @@ export default Ember.Component.extend(ClickOutside, {
             return;
         }
 
+        if(this.get('multiple') && !Array.isArray(this.get('value'))) {
+            this.set('value', []);
+        }
+
         this.set('_isOpen', true);
-        this.set('searchValue', this.get('displayValue'));
+        if(!this.get('multiple')) {
+            this.set('searchValue', this.get('displayValue'));
+        }
         this.searchAction();
         var self = this;
         Ember.run.next(function() {
@@ -170,8 +186,7 @@ export default Ember.Component.extend(ClickOutside, {
     },
 
     clickOutside(e) {
-        const exceptSelector = '.select-it-ignore';
-        if (exceptSelector && Ember.$(e.target).closest(exceptSelector).length > 0) {
+        if (Ember.$(e.target).closest('.select-it-ignore').length > 0) {
             return;
         }
 
@@ -180,11 +195,11 @@ export default Ember.Component.extend(ClickOutside, {
         }
     },
 
-    _attachClickOutsideHandler: on('didInsertElement', function() {
-        next(this, this.addClickOutsideListener);
+    _attachClickOutsideHandler: Ember.on('didInsertElement', function() {
+        Ember.run.next(this, this.addClickOutsideListener);
     }),
 
-    _removeClickOutsideHandler: on('willDestroyElement', function() {
+    _removeClickOutsideHandler: Ember.on('willDestroyElement', function() {
         this.removeClickOutsideListener();
     }),
 
@@ -199,15 +214,29 @@ export default Ember.Component.extend(ClickOutside, {
             var current = this.get('_searchResults').findBy('isHighlighted', true);
             current.set('isHighlighted', false);
 
-            result.toggleProperty('isHighlighted');
+            result.set('isHighlighted', true);
         },
         itemSelected(result) {
-            if(this.get('optionValuePath') && result.obj) {
-                this.set('value', result.obj[this.get('optionValuePath')]);
-            } else {
-                this.set('value', result.obj);
+
+            if(result) {
+                if(this.get('optionValuePath') && result.obj) {
+                    if(this.get('multiple')) {
+                        this.get('value').pushObject(result.obj[this.get('optionValuePath')]);
+                    } else {
+                        this.set('value', result.obj[this.get('optionValuePath')]);
+                    }
+                } else {
+                    if(this.get('multiple')) {
+                        this.get('value').pushObject(result.obj);
+                    } else {
+                        this.set('value', result.obj);
+                    }
+                }
             }
             this.closeDropDown();
+        },
+        removeValue(value) {
+            console.log('removeValue', value);
         }
     }
 });
