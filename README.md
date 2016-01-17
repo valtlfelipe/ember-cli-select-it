@@ -2,6 +2,8 @@
 
 Simple Ember dropdown select component.
 
+# This project is still in development. So for now there is no documentation or releases. Use at your own risk.
+
 ## Installation
 
 * `git clone` this repository
