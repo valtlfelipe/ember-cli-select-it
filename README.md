@@ -1,8 +1,8 @@
-# Ember-cli-select-it
+# ember-cli-select-it
 
 Simple Ember dropdown select component.
 
-# This project is still in development. So for now there is no documentation or releases. Use at your own risk.
+## This project is still in development. For now there is no documentation or releases. Use at your own risk.
 
 ## Installation
 
