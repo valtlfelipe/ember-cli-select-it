@@ -19,31 +19,32 @@ ember install ember-cli-select-it
 
 For now, I haven't created the documentation yet. Please follow the examples [here](http://valtlfelipe.github.io/ember-cli-select-it/#/examples).
 
-## Contributing
-Feel free to report issues, or even submit your pull request with new features or bug fixes. I would love to see some contribution.
 
 ## License
 
 [View the License](https://github.com/valtlfelipe/ember-cli-select-it/blob/master/LICENSE.md) for this repository.
 
-## Installation
+## Contributing
+Feel free to report issues, or even submit your pull request with new features or bug fixes. I would love to see some contribution.
+
+### Installation
 
 * `git clone` this repository
 * `npm install`
 * `bower install`
 
-## Running
+### Running
 
 * `ember server`
 * Visit your app at http://localhost:4200.
 
-## Running Tests
+### Running Tests
 
 * `npm test` (Runs `ember try:testall` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
 
-## Building
+### Building
 
 * `ember build`
 
