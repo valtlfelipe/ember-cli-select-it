@@ -1,6 +1,8 @@
-# ember-cli-select-it [![Build Status](https://travis-ci.org/valtlfelipe/ember-cli-select-it.svg?branch=master)](https://travis-ci.org/valtlfelipe/ember-cli-select-it)
+# ember-cli-select-it 
+[![npm version](https://badge.fury.io/js/ember-cli-select-it.svg)](http://badge.fury.io/js/ember-cli-select-it)
+[![Build Status](https://travis-ci.org/valtlfelipe/ember-cli-select-it.svg?branch=master)](https://travis-ci.org/valtlfelipe/ember-cli-select-it)
 
-Simple Ember dropdown select component based on Bootstrap. Supports Ember `>= 1.13.x` and `>= 2.x`.
+Simple Ember dropdown select component based on Bootstrap.
 
 ## Demo
 Do you want to see it in action? Visit [http://valtlfelipe.github.io/ember-cli-select-it/#/](http://valtlfelipe.github.io/ember-cli-select-it/#/).
@@ -15,10 +17,14 @@ ember install ember-cli-select-it
 
 ## Usage
 
-For now, I havent created the documentation yet. Please follow the examples [here](http://valtlfelipe.github.io/ember-cli-select-it/#/examples).
+For now, I haven't created the documentation yet. Please follow the examples [here](http://valtlfelipe.github.io/ember-cli-select-it/#/examples).
 
 ## Contributing
+Feel free to report issues, or even submit your pull request with new features or bug fixes. I would love to see some contribution.
 
+## License
+
+[View the License](https://github.com/valtlfelipe/ember-cli-select-it/blob/master/LICENSE.md) for this repository.
 
 ## Installation
 
