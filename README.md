@@ -15,7 +15,7 @@ ember install ember-cli-select-it
 
 ## Usage
 
-For now, I havent created the documentation yet. Please see the examples [here](http://valtlfelipe.github.io/ember-cli-select-it/#/examples).
+For now, I havent created the documentation yet. Please follow the examples [here](http://valtlfelipe.github.io/ember-cli-select-it/#/examples).
 
 ## Contributing
 
