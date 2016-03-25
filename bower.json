@@ -1,12 +1,5 @@
 {
   "name": "ember-cli-select-it",
-  "version": "0.1",
-  "homepage": "https://github.com/valtlfelipe/ember-cli-select-it",
-  "authors": [
-    "Felipe Valtl de Mello <https://github.com/valtlfelipe>"
-  ],
-  "keywords": ["ember", "ember-cli", "select", "bootstrap"],
-  "license": "MIT",
   "dependencies": {
     "ember": "^2.0.0",
     "ember-cli-shims": "0.0.6",
