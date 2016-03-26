@@ -4,6 +4,8 @@
 
 Simple Ember dropdown select component based on Bootstrap.
 
+*This component is still in development.
+
 ## Demo
 Do you want to see it in action? Visit [http://valtlfelipe.github.io/ember-cli-select-it/#/](http://valtlfelipe.github.io/ember-cli-select-it/#/).
 
