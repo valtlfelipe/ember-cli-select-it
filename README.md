@@ -1,4 +1,5 @@
 # ember-cli-select-it 
+[![Ember Observer Score](https://emberobserver.com/badges/ember-cli-select-it.svg)](https://emberobserver.com/addons/ember-cli-select-it)
 [![npm version](https://badge.fury.io/js/ember-cli-select-it.svg)](http://badge.fury.io/js/ember-cli-select-it)
 [![Build Status](https://travis-ci.org/valtlfelipe/ember-cli-select-it.svg?branch=master)](https://travis-ci.org/valtlfelipe/ember-cli-select-it)
 
