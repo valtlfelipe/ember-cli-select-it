@@ -3,87 +3,149 @@
  * Copyright 2016 Felipe Valtl de Mello
  * Licensed under MIT
  */
-.ember-select-it {
-    position: relative;
-}
-
-.ember-select-it .select-it-display {
-    cursor: pointer;
-}
-
-.ember-select-it .select-it-placeholder {
-    color: #999;
-}
-
-.ember-select-it .select-it-disabled {
-    background-color: #eee;
-    opacity: 1;
-    cursor: not-allowed;
-}
-
-.ember-select-it .select-it-hidden-input {
-    width: 100%;
-    position: absolute;
-    top: 0px;
-    z-index: -1;
-}
-
-.ember-select-it .select-it-arrow {
-    display: inline-block;
-    width: 20px;
-    height: 100%;
-    position: absolute;
-    right: 0;
-    top: 0;
-    font-size: 10px;
-    cursor: pointer;
-}
-.ember-select-it .select-it-arrow span {
-    display: block;
-    width: 100%;
-    height: 100%;
-    line-height: 33px;
-    text-align: center;
-}
-
-.ember-select-it .select-it-drop-list {
-    display: block;
-    width: 100%;
-    min-height: 34px;
-    height: auto;
-    border: 1px solid #ccc;
-    border-top: 0;
-    border-radius: 0 0 4px 4px;
-    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
-    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
-    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-    position: absolute;
-    top: 30px;
-    z-index: 9999;
-    background: #fff;
-    border-color: #66afe9;
-    outline: 0;
-}
-
-.ember-select-it .select-it-drop-list ul.select-it-results {
-    padding: 5px;
-    margin: 0;
-}
-
-.ember-select-it .select-it-drop-list ul.select-it-results li.highlighted {
-    color: white;
-    background-color: #337ab7;
-}
-
-.ember-select-it .select-it-drop-list ul.select-it-results li .select-it-result-label {
-    cursor: pointer;
-    padding: 3px 7px 4px;
-    margin: 0;
-}
-
-.ember-select-it .select-it-drop-list .select-it-no-results {
-    padding: 10px;
-    text-align: center;
-}
+ .ember-select-it {
+   position: relative;
+ }
+ .ember-select-it .select-it-drop-mask {
+   border: 0;
+   margin: 0;
+   padding: 0;
+   position: fixed;
+   left: 0;
+   top: 0;
+   min-height: 100%;
+   min-width: 100%;
+   height: auto;
+   width: auto;
+   opacity: 0;
+   z-index: 9998;
+   background-color: #fff;
+   display: block;
+ }
+ .ember-select-it .select-it-display {
+   cursor: pointer;
+   min-height: 34px;
+   height: auto;
+   padding-bottom: 0;
+   white-space: nowrap;
+   padding-right: 40px;
+   overflow: hidden;
+ }
+ .ember-select-it .select-it-placeholder {
+   color: #999;
+ }
+ .ember-select-it .select-it-disabled {
+   background-color: #eee;
+   opacity: 1;
+   cursor: not-allowed;
+ }
+ .ember-select-it .select-it-hidden-input {
+   width: 100%;
+   position: absolute;
+   top: 0px;
+   z-index: -1;
+ }
+ .ember-select-it .select-it-search {
+   border: 1px solid #1ab394;
+ }
+ .ember-select-it .select-it-arrow,
+ .ember-select-it .select-it-clear {
+   display: inline-block;
+   width: 20px;
+   height: 94%;
+   position: absolute;
+   right: 1px;
+   top: 0;
+   font-size: 10px;
+   cursor: pointer;
+   z-index: 9;
+ }
+ .ember-select-it .select-it-arrow span,
+ .ember-select-it .select-it-clear span {
+   display: block;
+   width: 100%;
+   height: 94%;
+   line-height: 33px;
+   text-align: center;
+   background: #fff;
+ }
+ .ember-select-it .select-it-clear {
+   right: 20px;
+ }
+ .ember-select-it .select-it-multiple {
+   cursor: default;
+   background: #f1f1f1;
+   border: 1px solid #ededed;
+   border-radius: 2px;
+   box-shadow: none;
+   color: #555;
+   margin: 0;
+   padding: 0px 5px;
+   font-size: 13px;
+   display: inline-block;
+   margin-bottom: 4px;
+   float: left;
+   margin-right: 5px;
+ }
+ .ember-select-it .select-it-multiple span {
+   cursor: pointer;
+   color: #888888;
+   font-size: 10px;
+ }
+ .ember-select-it .select-it-multiple span:hover {
+   color: #464646;
+ }
+ .ember-select-it.input-sm {
+   padding: inherit;
+ }
+ .ember-select-it.input-sm .select-it-display {
+   min-height: 30px;
+   padding-top: 4px;
+ }
+ .ember-select-it .select-it-drop-list,
+ .select-it-drop-list.select-it-modal-mode {
+   display: block;
+   width: 100%;
+   min-height: 34px;
+   height: auto;
+   border: 1px solid #1ab394;
+   border-top: 0;
+   border-radius: 0;
+   position: absolute;
+   top: 33px;
+   z-index: 9999;
+   background: #fff;
+   outline: 0;
+   border-top: 1px solid #e5e6e7;
+ }
+ .ember-select-it .select-it-drop-list .slimScrollDiv,
+ .select-it-drop-list.select-it-modal-mode .slimScrollDiv,
+ .ember-select-it .select-it-drop-list .select-it-scroll,
+ .select-it-drop-list.select-it-modal-mode .select-it-scroll {
+   height: auto !important;
+   max-height: 210px !important;
+ }
+ .ember-select-it .select-it-drop-list ul.select-it-results,
+ .select-it-drop-list.select-it-modal-mode ul.select-it-results {
+   padding: 5px;
+   margin: 0;
+ }
+ .ember-select-it .select-it-drop-list ul.select-it-results li.highlighted,
+ .select-it-drop-list.select-it-modal-mode ul.select-it-results li.highlighted {
+   color: white;
+   background-color: #337ab7;
+ }
+ .ember-select-it .select-it-drop-list ul.select-it-results li .select-it-result-label,
+ .select-it-drop-list.select-it-modal-mode ul.select-it-results li .select-it-result-label {
+   cursor: pointer;
+   padding: 3px 7px 4px;
+   margin: 0;
+ }
+ .ember-select-it .select-it-drop-list .select-it-no-results,
+ .select-it-drop-list.select-it-modal-mode .select-it-no-results {
+   padding: 10px;
+   text-align: center;
+ }
+ .select-it-drop-list.select-it-modal-mode {
+   display: none;
+ }

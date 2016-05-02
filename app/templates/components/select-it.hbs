@@ -1,38 +1,56 @@
 {{#if _isOpen}}
-    {{input type="text" value=searchValue class="form-control select-it-input select-it-search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="off"}}
+    <div class="select-it-drop-mask" {{action 'closeSearch'}}></div>
+    {{input type="text" value=_searchValue class="form-control select-it-input select-it-search" autocomplete="false" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="off"}}
     <span class="select-it-arrow" {{action 'closeSearch'}}><span class="glyphicon glyphicon-chevron-up"></span></span>
-    <div class="select-it-drop-list">
-        {{#if _searchResults}}
-            <ul class="select-it-results list-unstyled">
-                {{#each _searchResults as |result|}}
-                    <li class="{{if result.isHighlighted 'highlighted' ''}}"
-                        {{action 'itemHighlighted' result on="mouseEnter"}}
-                        {{action 'itemHighlighted' result on="mouseLeave"}}
-                        {{action 'itemSelected' result on="click"}}
-                    >
-                        <div class="select-it-result-label">
-                            {{result.value}}
-                        </div>
-                    </li>
-                {{/each}}
-            </ul>
+    <div class="select-it-drop-list {{if modalMode 'select-it-modal-mode' ''}}">
+        {{#if _searchEnabled}}
+            {{#if _searchResults}}
+                {{#select-it-slimscroll s-slimscroll="select-it-scroll" height="210px"}}
+                    <ul class="select-it-results list-unstyled">
+                        {{#each _searchResults as |result|}}
+                            <li class="{{if result.isHighlighted 'highlighted' ''}}"
+                                {{action 'itemHighlighted' result on="mouseEnter"}}
+                                {{action 'itemHighlighted' result on="mouseLeave"}}
+                                {{action 'itemSelected' result on="click"}}
+                            >
+                                <div class="select-it-result-label">
+                                    {{result.value}}
+                                </div>
+                            </li>
+                        {{/each}}
+                    </ul>
+                {{/select-it-slimscroll}}
+            {{else}}
+                <div class="select-it-no-results">{{t 'labels.no_results'}}</div>
+            {{/if}}
         {{else}}
-            <div class="select-it-no-results">Nenhum resultado</div>
+            <div class="select-it-no-results">{{t 'labels.s_select_min_search' chars=minSearch}}</div>
         {{/if}}
     </div>
 {{else}}
-    <div class="form-control select-it-display select-it-ignore {{if disabled 'select-it-disabled' ''}}" tabindex="0" {{action 'openSearch'}}>
+    <div class="form-control select-it-display {{if disabled 'select-it-disabled' ''}}" tabindex="0">
         {{#if showPlaceHolder}}
-            <span class="select-it-placeholder select-it-ignore">{{placeHolder}}</span>
+            <span class="select-it-placeholder">{{placeHolder}}</span>
         {{/if}}
         {{#if multiple}}
-            {{#each value as |val|}}
-                <a href {{action 'removeValue' value}} class="btn btn-sm btn-primary">{{val}}, </a>
+            {{#each displayValue as |val|}}
+                <span class="select-it-multiple">{{val.displayValue}} {{#unless disabled}}<span class="glyphicon glyphicon-remove" {{action 'removeValue' val.value}}></span>{{/unless}}</span>
             {{/each}}
         {{else}}
             {{displayValue}}
         {{/if}}
-        <span class="select-it-arrow"><span class="glyphicon glyphicon-chevron-down"></span></span>
+        {{#unless required}}
+            {{#unless multiple}}
+                {{#unless disabled}}
+                     {{#if value}}
+                        <span class="select-it-clear" {{action 'clear'}}><span class="glyphicon glyphicon-remove"></span></span>
+                    {{/if}}
+                {{/unless}}
+            {{/unless}}
+        {{/unless}}
+        {{#unless disabled}}
+            <span class="select-it-arrow"><span class="glyphicon glyphicon-chevron-down"></span></span>
+        {{/unless}}
     </div>
-    {{input type="text" value=value class="form-control select-it-hidden-input" disabled=disabled tabindex="-1" required=required}}
+    {{input type="text" value=value class="form-control select-it-hidden-input" readonly=true disabled=disabled tabindex="-1" required=required aria-hidden="true"}}
 {{/if}}

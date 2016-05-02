@@ -13,9 +13,12 @@ module.exports = function(defaults) {
     This build file does *not* influence how the addon or the app using it
     behave. You most likely want to be modifying `./index.js` or app's build file
   */
+ 
+  /* jQuery SlimScroll */
+  app.import(app.bowerDirectory + '/jquery-slimscroll/jquery.slimscroll.js');
 
-  //app.import('bower_components/bootstrap/dist/js/bootstrap.js');
-  app.import('bower_components/bootstrap/dist/css/bootstrap.css');
+  /* Bootstrap */
+  app.import(app.bowerDirectory + '/bootstrap/dist/css/bootstrap.css');
   app.import(app.bowerDirectory + '/bootstrap/dist/fonts/glyphicons-halflings-regular.eot', {
     destDir: 'fonts'
   });
