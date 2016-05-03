@@ -32,7 +32,7 @@ export default Ember.Component.extend({
                 });
             } else {
                 return this.get('content').find(function(item) {
-                    return item[self.get('valuePath')] == self.get('value');
+                    return item[self.get('valuePath')] == self.get('value'); // jshint ignore:line
                 });
             }
         }
