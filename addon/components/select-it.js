@@ -20,7 +20,7 @@ export default Ember.Component.extend({
     _searchResults: null,
     _searchValue: "",
 
-    _valueObj: Ember.computed('value', 'value.[]', 'valuePath', 'content', 'content.[]', function() {
+    _valueObj: Ember.computed("value", 'value.[]', 'valuePath', 'content', 'content.[]', function() {
         var isMultiple = this.get('multiple');
         var self = this;
 
