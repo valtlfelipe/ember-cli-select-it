@@ -3,6 +3,8 @@
 [![npm version](https://badge.fury.io/js/ember-cli-select-it.svg)](http://badge.fury.io/js/ember-cli-select-it)
 [![Build Status](https://travis-ci.org/valtlfelipe/ember-cli-select-it.svg?branch=master)](https://travis-ci.org/valtlfelipe/ember-cli-select-it)
 
+# Not maintained anymore!
+
 Simple Ember dropdown select component based on Bootstrap.
 
 *This component is still in development.
